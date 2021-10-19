@@ -91,4 +91,39 @@ end
 # Part 3
 
 class BookInStock
+  def initialize(isbn, price)
+    if isbn.empty? || price <= 0
+      raise ArgumentError;
+    end
+    @isbn = isbn;
+    @price = price;
+  end
+  def isbn
+    return @isbn
+  end
+  def price
+    return @price
+  end
+  def isbn=(isbn)
+    @isbn = isbn
+  end
+  def price=(price)
+    @price = price
+  end
+  def price_as_string
+    s = @price.to_s
+    n = 0;
+    for i in 0...(s.size - 1)
+      if s[i] == "."
+        n = s.size - 1 - i;
+        break;
+      end
+    end
+    if n == 0
+      s = s + ".00"
+    elsif n == 1
+      s = s + "0"
+    end
+    return "$#{s}"
+  end
 end
